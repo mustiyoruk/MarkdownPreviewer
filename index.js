@@ -1,3 +1,9 @@
+marked.setOptions({
+  breaks: true,
+});
+
+const renderer = new marked.Renderer();
+
 function App() {
   const [textInput, setTextInput] = React.useState("");
 
@@ -14,12 +20,21 @@ function App() {
         value={textInput}
       ></textarea>
       <h3 className="mt-3">Output</h3>
-      <Preview markdown="textInput" />
+      <Preview markdown={textInput} />
     </div>
   );
 }
 
-function Preview(markdown) {}
+function Preview({ markdown }) {
+  return (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: marked(markdown, { renderer: renderer }),
+      }}
+      id="preview"
+    ></div>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
