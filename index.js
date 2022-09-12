@@ -9,12 +9,17 @@ function App() {
         id=""
         cols="30"
         rows="10"
+        onChange={(e) => setTextInput(e.target.value)}
         className="textarea"
         value={textInput}
       ></textarea>
+      <h3 className="mt-3">Output</h3>
+      <Preview markdown="textInput" />
     </div>
   );
 }
+
+function Preview(markdown) {}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
